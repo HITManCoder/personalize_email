@@ -2,8 +2,7 @@ import yagmail
 import pandas as pd
 from random import randint
 from time import sleep
-
-
+import keyring
 
 
 pd.set_option('display.max_rows', 10)
@@ -21,39 +20,58 @@ df2.to_csv(filename2)
 """
 
 #Email
+password = keyring.get_password("Gmail HIT Travel", "HITTravelDeals@gmail.com")
+
 title="You are Awesome, EOI Granted, What's Next"
-body="""If you haven't heard, ConocoPhillips graciously accepted my expression of interest (after we recovered our power, water and internet :).  Over the past few months, since raising my hand, I have been ruminating on my 14 years at COP, and it all keeps boiling down to you.  My thoughts did not pull to an exciting project, a good performance review, the money earned or money saved, not even the awesome destinations work took me, it was the people.  The time we spent together was wonderful and it's people like yourself that made my career so fulfilling and ultimately the decision to EOI so difficult.  I appreciate every second we spent together over the past 14 years and want to thank you for being awesome and a special part of mine and my family's life.  My wish is that we continue the journey and in hopes that we do I'll leave you with my contact info and what I'll be working on next.
 
-I blog about once a month on life, finances, and behavioral science at HIT Investments.  Subscribe here or follow my blog here
-If you like compounding $, I manage the fund HIT Capital (and have room for a few more investors).  Follow my semi-annual reports here or visit the website here (the password is hitcapital).
-If you want to shoot me an email I'm at Stephen.Read@hitinvestmentsllc.com
-If you prefer social media my linkedin is https://www.linkedin.com/in/stephenreadhit/
-If you prefer good ole text or voice my cell # is 3092537887
-If you want to follow current and future code, my github account is hitmancoder
-My personal favorite, if you want to catch up in person, grab a coffee/beer/grub, take a walk, or ride the anthills, book some time on my new calendar here
+body_0 = """
+If you haven't heard, ConocoPhillips graciously accepted my expression of interest early last week <a href="https://www.hitinvestments.com/freeze/">(after we recovered power, water and internet :)</a>.
+xxx
+Over the past few months, since initially raising my hand for severance, I took time to reflect on my 14 year career at ConocoPhillips. To my surprise, the thoughts did not flow to an exciting project, a great performance review, supervising offshore, inking a big deal, or all the money earned and or saved, it was you, the people I met and relationships built along the way.
 
-Thank you for all you have done for my family and I and for making the past 14 years so fulfilling.  I look forward to staying in touch and seeing where the next 14 years takes us :)
+Our time together was wonderful and it was co-workers like yourself that made my career so fulfilling and ultimately the decision to EOI so difficult.
 
+I appreciate you and each second we spent together over the past 14 years.  Thank you for being awesome and a special part of my family and I's life.
+
+Although I will no longer be badging in, my wish is that our mutual journey continues and in hopes that it does my contact info and what I'm building next is below:
+"""
+body_1="""<div> <ul> <li> Educate - I blog once a month on life, finances, and behavioral economics. Follow the blog <a href="https://www.hitinvestments.com/subscribe">here</a>.
+<li> Grow - If you like to put your money to work, I manage the fund HIT Capital (and it has room for a few more investors). Sign up for my semi-annual reports <a href="https://www.hitinvestments.com/subscribe">here</a> or visit the website <a href="http://www.hitcapitallllp.com">here</a> (password is hitcapital).
+<li> Email - I'm at Stephen.Read@HITinvestmentsLLC.com 
+<li> Socialize - I'm on <a href="https://www.linkedin.com/in/stephenreadhit/">Linkedin</a> and my Twitter handle is @HITInvestments 
+<li> Call - my number is 3092537887 
+<li> Code - my github account is hitmancoder 
+<li> Meet Up - If you have time to catch up, grab lunch, take a walk, or ride the anthills, my new calendar is <a href="http://www.calendly.com/hitinvestments" target="_blank" data-saferedirecturl="https://www.google.com/url?q=http://www.calendly.com/hitinvestments&amp;source=gmail&amp;ust=1615040022353000&amp;usg=AFQjCNFe0erKvimJc4AKy-QhiCfz34oHBg">here</a>
+"""
+body_2="""Thank you for being you, being awesome, and for fulfilling my journey at COP. I look forward to staying in touch and seeing where the next 14 years takes us :)"""
+
+body_3="""
 Warm Regards,
-Stephen Read 
-Investment Engineer
-T. 309.253.7887 
-       
+Stephen Read
+Engineer, Coder, Dad, Investor, Writer
+T 309.253.7887 
+https://www.hitinvestments.com
 """
 
 filename=r"C:\Users\Stephen\Python\Emails\email_practice.csv"
 dfemaillist=pd.read_csv(filename,header=None)
+
+
 
 for a in dfemaillist.iterrows():
     name=(a[1][0])+','
     email=(a[1][1])
     sleep(randint(1, 10))
 
-    print(name)
-    print(title)
-    print(body)
 
-    """yag = yagmail.SMTP('HITTravelDeals@gmail.com', password)
-    contents = [name, body]
+    print(title)
+    print(name)
+    print(body_0)
+    print(body_1)
+    print(body_2)
+    print(body_3)
+
+    yag = yagmail.SMTP('HITTravelDeals@gmail.com', password)
+    contents = [name, body_0,body_1,body_2,body_3]
     yag.send(email, title, contents)
-"""
+    break
