@@ -5,11 +5,7 @@ from time import sleep
 import keyring
 
 
-pd.set_option('display.max_rows', 10)
-pd.set_option('display.max_columns', 150)
-pd.set_option('display.width', 500)
-
-#setup
+#File Clean
 """
 df=pd.read_csv(filename)
 
@@ -61,17 +57,10 @@ dfemaillist=pd.read_csv(filename,header=None)
 for a in dfemaillist.iterrows():
     name=(a[1][0])+','
     email=(a[1][1])
-    sleep(randint(1, 10))
+    sleep(randint(1, 240))
 
+    print(name, email)
 
-    print(title)
-    print(name)
-    print(body_0)
-    print(body_1)
-    print(body_2)
-    print(body_3)
-
-    yag = yagmail.SMTP('HITTravelDeals@gmail.com', password)
+    yag = yagmail.SMTP('xx', password)
     contents = [name, body_0,body_1,body_2,body_3]
     yag.send(email, title, contents)
-    break
