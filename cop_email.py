@@ -8,7 +8,6 @@ import keyring
 #File Clean
 """
 df=pd.read_csv(filename)
-
 df2=pd.concat([df, df['Name'].str.split(',', expand=True)], axis=1)
 df3=df2[['Unnamed: 0',1,0,'Email', 'Organization Level 6', 'Organization Level 5', 'Name']]
 df2 = df3.rename(columns={0: 'last name', 1: 'first name', 'Unnamed: 0':'Known'})
@@ -49,7 +48,6 @@ https://www.hitinvestments.com
 
 filename=r"C:\Users\Stephen\Python\Emails\email.csv"
 dfemaillist=pd.read_csv(filename,header=None)
-
 
 
 for a in dfemaillist.iterrows():
